@@ -1,0 +1,28 @@
+@tailwind base;
+/* Firefox */
+* {
+  scrollbar-width: none;
+  scrollbar-track-color: transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(100, 100, 118);
+  border-radius: 14px;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@tailwind components;
+@tailwind utilities;

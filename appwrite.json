@@ -1,0 +1,719 @@
+{
+    "projectId": "67a8bd19003cafeb47d0",
+    "projectName": "WeSperr",
+    "databases": [
+        {
+            "$id": "67a8bde9000bd3564754",
+            "name": "wesperr_db",
+            "enabled": true
+        }
+    ],
+    "collections": [
+        {
+            "$id": "user-details",
+            "$permissions": [
+                "create(\"users\")",
+                "read(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a8bde9000bd3564754",
+            "name": "user-details",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "avatarURL",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 300,
+                    "default": null
+                },
+                {
+                    "key": "location",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": "Unknown"
+                },
+                {
+                    "key": "changerID",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "changeLog",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 1000,
+                    "default": null
+                },
+                {
+                    "key": "userID",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "avatarID",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "about",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 30,
+                    "default": "I'm on WeSperr!"
+                },
+                {
+                    "key": "groups",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "groups",
+                    "relationType": "manyToMany",
+                    "twoWay": true,
+                    "twoWayKey": "members",
+                    "onDelete": "setNull",
+                    "side": "child"
+                },
+                {
+                    "key": "chats",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "chats",
+                    "relationType": "manyToMany",
+                    "twoWay": true,
+                    "twoWayKey": "participants",
+                    "onDelete": "setNull",
+                    "side": "child"
+                },
+                {
+                    "key": "lastOnlineAt",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "created_at_idx",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "$createdAt"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "idxUserID",
+                    "type": "fulltext",
+                    "status": "available",
+                    "attributes": [
+                        "userID"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "user_name_idx",
+                    "type": "fulltext",
+                    "status": "available",
+                    "attributes": [
+                        "name"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "idx_user_id",
+                    "type": "unique",
+                    "status": "available",
+                    "attributes": [
+                        "userID"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "groups",
+            "$permissions": [
+                "create(\"users\")",
+                "read(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a8bde9000bd3564754",
+            "name": "groups",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "changeLog",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 1000,
+                    "default": "created"
+                },
+                {
+                    "key": "avatarID",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "changerID",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 200,
+                    "default": null
+                },
+                {
+                    "key": "admins",
+                    "type": "string",
+                    "required": false,
+                    "array": true,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "avatarURL",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 300,
+                    "default": null
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 30,
+                    "default": null
+                },
+                {
+                    "key": "description",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "members",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "user-details",
+                    "relationType": "manyToMany",
+                    "twoWay": true,
+                    "twoWayKey": "groups",
+                    "onDelete": "setNull",
+                    "side": "parent"
+                },
+                {
+                    "key": "groupMessages",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "group-messages",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "groupDoc",
+                    "onDelete": "cascade",
+                    "side": "child"
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "group-messages",
+            "$permissions": [
+                "create(\"users\")",
+                "read(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a8bde9000bd3564754",
+            "name": "group-messages",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "replying",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 10000,
+                    "default": null
+                },
+                {
+                    "key": "reactions",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 1000,
+                    "default": "{\n\"likes\":[]\n}"
+                },
+                {
+                    "key": "read",
+                    "type": "boolean",
+                    "required": false,
+                    "array": false,
+                    "default": false
+                },
+                {
+                    "key": "attachments",
+                    "type": "string",
+                    "required": false,
+                    "array": true,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "body",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 1500,
+                    "default": null
+                },
+                {
+                    "key": "senderID",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "groupDoc",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "groups",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "groupMessages",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "editedAt",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "senderID_idx",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "senderID"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "read_idx",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "read"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "createdAt_idx",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "$createdAt"
+                    ],
+                    "orders": [
+                        "DESC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "chats",
+            "$permissions": [
+                "create(\"users\")",
+                "read(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a8bde9000bd3564754",
+            "name": "chats",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "changerID",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 200,
+                    "default": null
+                },
+                {
+                    "key": "changeLog",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 1000,
+                    "default": null
+                },
+                {
+                    "key": "participants",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "user-details",
+                    "relationType": "manyToMany",
+                    "twoWay": true,
+                    "twoWayKey": "chats",
+                    "onDelete": "setNull",
+                    "side": "parent"
+                },
+                {
+                    "key": "chatMessages",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "chat-messages",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "chatDoc",
+                    "onDelete": "cascade",
+                    "side": "child"
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "createdAtIdx",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "$createdAt"
+                    ],
+                    "orders": [
+                        "DESC"
+                    ]
+                },
+                {
+                    "key": "chatIDidx",
+                    "type": "fulltext",
+                    "status": "available",
+                    "attributes": [
+                        "$id"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "chat-messages",
+            "$permissions": [
+                "create(\"users\")",
+                "read(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a8bde9000bd3564754",
+            "name": "chat-messages",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "reactions",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 2000,
+                    "default": "{\n\"likes\" : []\n}"
+                },
+                {
+                    "key": "attachments",
+                    "type": "string",
+                    "required": false,
+                    "array": true,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "recepientID",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "replying",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 1000,
+                    "default": null
+                },
+                {
+                    "key": "senderID",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "read",
+                    "type": "boolean",
+                    "required": false,
+                    "array": false,
+                    "default": false
+                },
+                {
+                    "key": "body",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 1500,
+                    "default": null
+                },
+                {
+                    "key": "chatDoc",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "chats",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "chatMessages",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "editedAt",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "senderID_idx",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "senderID"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "read_idx",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "read"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "created_at_idx",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "$createdAt"
+                    ],
+                    "orders": [
+                        "DESC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "channels",
+            "$permissions": [],
+            "databaseId": "67a8bde9000bd3564754",
+            "name": "channels",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                },
+                {
+                    "key": "about",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                },
+                {
+                    "key": "changeLog",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        }
+    ],
+    "buckets": [
+        {
+            "$id": "user-avatars",
+            "$permissions": [
+                "create(\"users\")",
+                "read(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "fileSecurity": true,
+            "name": "user-avatars-status",
+            "enabled": true,
+            "maximumFileSize": 5000000,
+            "allowedFileExtensions": [
+                "jpg",
+                "png",
+                "svg",
+                "webp",
+                "gif",
+                "mp4",
+                "jpeg"
+            ],
+            "compression": "none",
+            "encryption": true,
+            "antivirus": true
+        },
+        {
+            "$id": "group-avatars",
+            "$permissions": [
+                "create(\"users\")",
+                "read(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "fileSecurity": false,
+            "name": "group-avatars",
+            "enabled": true,
+            "maximumFileSize": 5000000,
+            "allowedFileExtensions": [
+                "jpg",
+                "png",
+                "svg",
+                "gif",
+                "webp",
+                "jpeg"
+            ],
+            "compression": "gzip",
+            "encryption": true,
+            "antivirus": true
+        },
+        {
+            "$id": "chat-message-attachments",
+            "$permissions": [
+                "create(\"users\")",
+                "read(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "fileSecurity": false,
+            "name": "chat-message-attachments",
+            "enabled": true,
+            "maximumFileSize": 5000000,
+            "allowedFileExtensions": [
+                "jpg",
+                "png",
+                "svg",
+                "gif",
+                "pdf"
+            ],
+            "compression": "gzip",
+            "encryption": true,
+            "antivirus": true
+        },
+        {
+            "$id": "group-message-attachments",
+            "$permissions": [
+                "create(\"any\")",
+                "read(\"any\")",
+                "update(\"any\")",
+                "delete(\"any\")"
+            ],
+            "fileSecurity": false,
+            "name": "group-message-attachments",
+            "enabled": true,
+            "maximumFileSize": 5000000,
+            "allowedFileExtensions": [
+                "jpg",
+                "png",
+                "svg",
+                "gif",
+                "pdf"
+            ],
+            "compression": "none",
+            "encryption": true,
+            "antivirus": true
+        }
+    ]
+}
